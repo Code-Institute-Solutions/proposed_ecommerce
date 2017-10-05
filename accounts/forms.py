@@ -5,11 +5,17 @@ from django.core.exceptions import ValidationError
 
 
 class UserLoginForm(forms.Form):
+    """
+    Used by the user to enter login credentials
+    """
     username_or_email = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 
 class UserRegistrationForm(UserCreationForm):
+    """
+    Used by the user to sign up with the website
+    """
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password Confirmation',
