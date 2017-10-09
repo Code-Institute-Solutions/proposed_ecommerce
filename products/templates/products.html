@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<<<<<<< HEAD
+
 <div class="row row-flex">
 {% for product in products %}
     
@@ -30,34 +30,4 @@
     </div>
 {% endfor %}
 </div>
-=======
-
-{% for product in products %}
-
-<div class="col-md-3 col-sm-6 display panel panel-default">
-    
-    <div class="panel-body" >
-        <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-        
-        <div class="caption">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p>{{ product.price }}</p>
-            <p>
-                
-                
-                <form method="post" action="{% url 'add_to_cart' product.id %}">
-                    {% csrf_token %}
-                    Quantity
-                    <input name='quantity' type="number" min="1" max="999">
-                    <button class="btn btn-success" type="submit">Add</button>
-                </form>
-            </p>
-        </div>
-    </div>
-</div>
-{% endfor %}
-</tbody>
-</table>
->>>>>>> b309732768678972c989ce48cda76d5af369c8cb
 {% endblock %}

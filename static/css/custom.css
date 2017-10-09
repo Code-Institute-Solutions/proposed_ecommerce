@@ -32,24 +32,17 @@ footer {
   background-color: #c67605;
 }
 
-<<<<<<< HEAD
-.product {
-=======
-.display {
-    margin: 30px;
-    width: 200px;
-}
 
 .product {
     margin: 20px;
->>>>>>> b309732768678972c989ce48cda76d5af369c8cb
+
     background-size:contain;
     background-position:center center;
     background-repeat:no-repeat;
     width: 150px;
     height: 150px;
     margin: 0 auto;
-<<<<<<< HEAD
+
 }
 
 .caption p {
@@ -74,6 +67,5 @@ footer {
 
 .product-description {
     min-height: 40px;
-=======
->>>>>>> b309732768678972c989ce48cda76d5af369c8cb
+
 }
