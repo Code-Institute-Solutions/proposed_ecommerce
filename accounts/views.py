@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
@@ -6,7 +6,6 @@ from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
@@ -26,11 +25,8 @@ def login(request):
                 auth.login(request, user)
                 messages.error(request, "You have successfully logged in")
 
-                if request.GET and request.GET['next'] !='':
-                    next = request.GET['next']
-                    return HttpResponseRedirect(next)
-                else:
-                    return redirect(reverse('index'))
+                next_url = request.GET.get('next') or reverse('index')
+                return redirect(next_url)
             else:
                 user_form.add_error(None, "Your username or password are incorrect")
     else:
@@ -59,12 +55,9 @@ def register(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, "You have successfully registered")
-                
-                if request.GET and request.GET['next'] !='':
-                    next = request.GET['next']
-                    return HttpResponseRedirect(next)
-                else:
-                    return redirect(reverse('index'))
+
+                next_url = request.GET.get('next') or reverse('index')
+                return redirect(next_url)
             else:
                 messages.error(request, "unable to log you in at this time!")
     else:

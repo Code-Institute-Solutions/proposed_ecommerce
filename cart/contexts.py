@@ -4,18 +4,15 @@ from products.models import Product
 
 def cart_contents(request):
     """
-    Ensures that the cart contents are available when rendering every page. 
+    Makes the cart contents available in any template.
     """
-
     cart = request.session.get('cart', {})
-    
-    cart_items = []
-    total = 0
-    product_count = 0
-    for id, quantity in cart.items():
-        product = get_object_or_404(Product, pk=id)
-        total += quantity * product.price
-        product_count += quantity
-        cart_items.append({'id': id, 'quantity': quantity, 'product': product})
 
-    return { 'cart_items': cart_items, 'total': total, 'product_count': product_count }
+    cart_items = {
+        pk: {'quantity': quantity, 'product': get_object_or_404(Product, pk=pk)}
+        for pk, quantity in cart.items()
+    }
+    product_count = sum(item['quantity'] for item in cart_items.values())
+    total = sum(item['quantity'] * item['product'].price for item in cart_items.values())
+
+    return {'cart_items': cart_items, 'total': total, 'product_count': product_count}
